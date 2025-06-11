@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="keywords" content="MLLM safety, jailbreak attacks, inference-time alignment, multimodal large language models, AI safety, adversarial attacks, Immune framework, model robustness, safe AI deployment, visual reasoning security">
+  <meta name="description" content="Explore 'Immune,' a novel framework enhancing safety in Multimodal Large Language Models (MLLMs) by defending against jailbreak attacks through inference-time alignment.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IMMUNE</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R2SLSWE2V1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-R2SLSWE2V1');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">
+            RELIC<img src="./static/images/icon.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-left: 5px;"> : Enhancing Reward Model Generalization for Low-Resource Indic
+Languages with Few-Shot Examples
+          </h1>
+          <!-- <h2 class="subtitle is-3 publication-conference">
+            <span class="tag is-info" style="font-size: 0.75em; padding: 0.75em 1.25em;">CVPR 2025</span>
+          </h2> -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=zE8aFIwAAAAJ&hl=en">Soumya Suvra Ghosal</a><sup>1*</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=5tdH2eEAAAAJ&hl=en">Vaibhav Singh</a><sup>2*</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/">Akash Ghosh</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/">Soumyabrata Pal</a><sup>4</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/">Subhadip Baidya</a><sup>5</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/">Sriparna Saha</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=X08l_4IAAAAJ&hl=en">Dinesh Manocha</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Maryland</span> &nbsp;&nbsp;
+            <span class="author-block"><sup>2</sup>Indian Institute of Technology Bombay</span>&nbsp;&nbsp;
+            <span class="author-block"><sup>3</sup>Indian Institute of Technology Patna</span>&nbsp;
+            <span class="author-block"><sup>4</sup>Adobe Research</span>&nbsp;&nbsp;
+            <span class="author-block"><sup>5</sup>Indian Institute of Technology Kanpur</span>&nbsp;
+          </div>
+        
+          <div>
+            <span><strong>∗</strong> <em>denotes equal contribution</em></span><br>
+          </div>
+          
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/itsvaibhav01/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+              </span> -->
+              <!-- Site Link. -->
+              <span class="link-block">
+                <a href="./static/transcreation.bib" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <svg class="svg-inline--fa fa-file-pdf fa-w-12" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg>
+                  </span>
+                  <span>Cite</span>
+                </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="carousel-section">
+  <div class="container">
+    <img src="./static/images/teaser_extra_3.png" alt="Slide 3">  
+  </div>
+  
+
+  <!-- Caption -->
+  <h2 class="subtitle has-text-centered" style="margin-top: 1rem;">
+    <span class="dnerf">Relic</span>: SOTA
+  </h2>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Reward models are essential for aligning large
+            language models (LLMs) with human prefer-
+            ences. However, most open-source multilin-
+            gual reward models are primarily trained on
+            preference datasets in high-resource languages,
+            resulting in unreliable reward signals for low-
+            resource Indic languages. Collecting large-
+            scale, high-quality preference data for these
+            languages is prohibitively expensive, making
+            preference-based training approaches imprac-
+            tical. To address this challenge, we propose
+            RELIC, a novel in-context learning framework
+            for reward modeling in low-resource Indic
+            languages. RELIC trains a retriever with a
+            pairwise ranking objective to select in-context
+            examples from auxiliary high-resource lan-
+            guages that most effectively highlight the dis-
+            tinction between preferred and less-preferred
+            responses. Extensive experiments on three pref-
+            erence datasets—PKU-SafeRLHF, WebGPT,
+            and HH-RLHF—using state-of-the-art open-
+            source reward models demonstrate that RELIC
+            significantly improves reward model accuracy
+            for low-resource Indic languages, consistently
+            outperforming existing example selection meth-
+            ods. For example, on Bodo—a low-resource
+            Indic language—using a LLaMA-3.2-3B re-
+            ward model, RELIC achieves a 12.81% and
+            10.13% improvement in accuracy over zero-
+            shot prompting and state-of-the-art example
+            selection method, respectively.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Algo -->
+    
+    
+
+    <!-- Paper index. -->
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code></code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
