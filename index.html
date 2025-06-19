@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
+  <link rel="icon" href="./static/images/favicon.ico">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -162,9 +162,9 @@ Languages with Few-Shot Examples
   
 
   <!-- Caption -->
-  <h2 class="subtitle has-text-centered" style="margin-top: 1rem;">
+  <h4 class="subtitle has-text-centered" style="margin-top: 1rem;">
     Safety reward scores for safe vs. unsafe responses in English, Hindi, and Bodo—correctly favoring safe replies in high-resource languages but misranking them in low-resource Bodo.
-  </h2>
+  </h4>
 </section>
 
 
@@ -173,7 +173,7 @@ Languages with Few-Shot Examples
   <div class="container is-max-desktop">
     <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
+      <div class="column is-four-sixths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
@@ -196,69 +196,164 @@ Languages with Few-Shot Examples
     <!--/ Abstract. -->
 
     <!-- Algo -->
-  <div class="experiment-results">
-    <h2>Experimental Results</h2>
-    <table class="results-table">
-      <caption>Table 1: Evaluation on PKU-SafeRLHF (Ji et al., 2024).</caption>
-      <thead>
-        <tr>
-          <th>Method</th>
-          <th>Bodo LM-3.1-8B</th>
-          <th>Bodo LM-3.2-3B</th>
-          <th>Santali LM-3.1-8B</th>
-          <th>Santali LM-3.2-3B</th>
-          <th>Manipuri LM-3.1-8B</th>
-          <th>Manipuri LM-3.2-3B</th>
-          <th>Odia LM-3.1-8B</th>
-          <th>Odia LM-3.2-3B</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Zero-shot ✗</td>
-          <td>54.32</td><td>53.18</td><td>43.76</td><td>51.90</td>
-          <td>47.88</td><td>53.65</td><td>62.53</td><td>52.27</td>
-        </tr>
-        <tr>
-          <td>Random ✗</td>
-          <td>55.41</td><td>52.67</td><td>45.88</td><td>50.66</td>
-          <td>45.39</td><td>54.03</td><td>56.45</td><td>53.77</td>
-        </tr>
-        <tr>
-          <td>BM25 ✗</td>
-          <td>48.22</td><td>56.09</td><td>43.94</td><td>56.82</td>
-          <td>48.33</td><td>55.47</td><td>66.94</td><td>63.38</td>
-        </tr>
-        <tr>
-          <td>Top-K ✗</td>
-          <td>57.53</td><td>58.91</td><td>45.84</td><td>55.48</td>
-          <td>50.91</td><td>51.32</td><td>68.34</td><td>60.72</td>
-        </tr>
-        <tr>
-          <td>EPR ✓</td>
-          <td>58.74</td><td>60.57</td><td>46.66</td><td>59.11</td>
-          <td>54.18</td><td>55.64</td><td>71.67</td><td>62.01</td>
-        </tr>
-        <tr>
-          <td><strong>RELIC (Ours) ✓</strong></td>
-          <td><strong>64.29</strong></td><td><strong>62.73</strong></td>
-          <td><strong>67.92</strong></td><td><strong>65.48</strong></td>
-          <td><strong>62.84</strong></td><td><strong>59.91</strong></td>
-          <td><strong>77.67</strong></td><td><strong>69.93</strong></td>
-        </tr>
-        <tr>
-          <td>Absolute Gain (∆)</td>
-          <td>5.55</td><td>2.16</td><td>21.26</td><td>6.37</td>
-          <td>8.66</td><td>4.27</td><td>6.00</td><td>6.55</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-sixths">
+        <h2 class="title is-3">Algorithm</h2>
+        <div class="content has-text-justified">
+          <p>
+            RELIC learns language-specific retrievers via a pairwise ranking loss, then uses those retrievers to select auxiliary few-shot examples in low-resource target languages.
+          </p>
+        </div>
 
+        <div class="algorithm-code" style="text-align: left; font-family: monospace; background: #f9f9f9; padding: 1em; overflow-x: auto;">
+          <h3 class="title is-5">Algorithm 1: Training the Retriever</h3>
+          <pre>
+            Input:
+              Dₜ = low-resource target-language example bank  
+              {Dᴴ₁, …, Dᴴₚ} = high-resource language example banks  
+            Output:
+              Φ = ∅  (set of trained retrievers)
 
+            1. Φ ← ∅  
+            2. For each Dᴴₚ ∈ {Dᴴ₁, …, Dᴴₚ} do  
+              a. Initialize φₚ, ψₚ with pre-trained M-BERT encoder  
+              b. (φₚ*, ψₚ*) ← arg min₍φₚ,ψₚ₎ Lₚₐᵢᵣ(Dₜ, Dᴴₚ)  
+              c. R̂ₚ ← {φₚ*, ψₚ*}  
+              d. Φ ← Φ ∪ R̂ₚ  
+            3. Return Φ
+          </pre>
+        </div>
+        <br>
+        <div class="algorithm-code" style="text-align: left; font-family: monospace; background: #f9f9f9; padding: 1em; overflow-x: auto;">
+          <h3 class="title is-5">Algorithm 2: High-Resource Example Bank Selection</h3>
+          <pre>
+            Input:
+              Dₜ = low-resource target-language examples  
+              {Dᴴ₁, …, Dᴴₚ} = high-resource language banks  
+              ρ = pre-trained M-BERT encoder  
+              γ = similarity threshold  
+            Output:
+              Dᵃᵘˣ ⊆ {Dᴴ₁, …, Dᴴₚ}
+
+            1. Compute  
+                eₜ = (1/|Dₜ|) ∑₍xᵢ,yᵢ₎∈Dₜ ρ(xᵢ, yᵢ)  
+            2. sim_list ← []  
+            3. For each Dᴴₚ ∈ {Dᴴ₁, …, Dᴴₚ} do  
+              a. eₚ = (1/|Dᴴₚ|) ∑₍xⱼ,yⱼ₎∈Dᴴₚ ρ(xⱼ, yⱼ)  
+              b. simₚ = cosine_sim(eₚ, eₜ)  
+              c. sim_list ← sim_list ∪ {simₚ}  
+            4. Dᵃᵘˣ = {Dᴴₚ | simₚ ≥ percentile(sim_list, γ)}  
+            5. Return Dᵃᵘˣ
+          </pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- / Algo -->
+
+    <!-- Experiment -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-sixths">
+        <h2 class="title is-3">Experimental Results</h2>
+        <div class="content has-text-justified">
+          <p>
+            Table below reports accuracy (%) on the  
+            <a href="https://huggingface.co/datasets/PKU-Alignment/PKU-SafeRLHF" target="_blank" rel="noopener">
+              PKU-SafeRLHF
+            </a>  
+            preference dataset: the fraction of test pairs where the reward model assigns a higher score to the safe response. We evaluate five retrieval-or-prompt-only baselines—Zero-shot, Random, BM25, Top-K and EPR—and compare them to our method, <strong>RELIC</strong>.
+          </p>
+          <p>
+            “Finetuning-Based” ✓ denotes methods that update model weights on preference data; ✗ denotes purely in-context or retrieval-only approaches. Results are shown for four low-resource Indic languages (Bodo, Santali, Manipuri, Odia), using two LLaMA-3 variants per language: 3.1-8B (8 B parameters) and 3.2-3B (3 B parameters). Boldface highlights the best accuracy per column, and the Δ row gives the absolute improvement of RELIC over the strongest baseline.
+          </p>
+        </div>
+        <table class="table is-bordered is-striped is-hoverable is-fullwidth"
+        style="font-size: 0.9rem; line-height: 1.2; border-collapse: collapse;"
+        cellpadding="4">
+          <thead>
+            <tr style="background-color: #f2f2f2; color: inherit;">
+              <th rowspan="2" style="vertical-align: middle; min-width: 100px;">Finetuning-Based</th>
+              <th rowspan="2" style="vertical-align: middle;">Methods</th>
+              <th colspan="2" style="border-right: 2px solid #000; border-bottom: 2px solid #000;">Bodo</th>
+              <th colspan="2" style="border-right: 2px solid #000; border-bottom: 2px solid #000;">Santali</th>
+              <th colspan="2" style="border-right: 2px solid #000; border-bottom: 2px solid #000;">Manipuri</th>
+              <th colspan="2" style="border-bottom: 2px solid #000;">Odia</th>
+            </tr>
+            <tr style="background-color: #f2f2f2; color: inherit;">
+              <th>LM-3.1-8B</th>
+              <th style="border-right: 2px solid #000;">LM-3.2-3B</th>
+              <th>LM-3.1-8B</th>
+              <th style="border-right: 2px solid #000;">LM-3.2-3B</th>
+              <th>LM-3.1-8B</th>
+              <th style="border-right: 2px solid #000;">LM-3.2-3B</th>
+              <th>LM-3.1-8B</th>
+              <th>LM-3.2-3B</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>✗</td>
+              <td>Zero-shot</td>
+              <td>54.32</td><td style="border-right: 2px solid #000;">53.18</td>
+              <td>43.76</td><td style="border-right: 2px solid #000;">51.90</td>
+              <td>47.88</td><td style="border-right: 2px solid #000;">53.65</td>
+              <td>62.53</td><td>52.27</td>
+            </tr>
+            <tr>
+              <td>✗</td>
+              <td>Random</td>
+              <td>55.41</td><td style="border-right: 2px solid #000;">52.67</td>
+              <td>45.88</td><td style="border-right: 2px solid #000;">50.66</td>
+              <td>45.39</td><td style="border-right: 2px solid #000;">54.03</td>
+              <td>56.45</td><td>53.77</td>
+            </tr>
+            <tr>
+              <td>✗</td>
+              <td>BM25</td>
+              <td>48.22</td><td style="border-right: 2px solid #000;">56.09</td>
+              <td>43.94</td><td style="border-right: 2px solid #000;">56.82</td>
+              <td>48.33</td><td style="border-right: 2px solid #000;">55.47</td>
+              <td>66.94</td><td>63.38</td>
+            </tr>
+            <tr>
+              <td>✗</td>
+              <td>Top-K</td>
+              <td>57.53</td><td style="border-right: 2px solid #000;">58.91</td>
+              <td>45.84</td><td style="border-right: 2px solid #000;">55.48</td>
+              <td>50.91</td><td style="border-right: 2px solid #000;">51.32</td>
+              <td>68.34</td><td>60.72</td>
+            </tr>
+            <tr>
+              <td>✓</td>
+              <td>EPR</td>
+              <td>58.74</td><td style="border-right: 2px solid #000;">60.57</td>
+              <td>46.66</td><td style="border-right: 2px solid #000;">59.11</td>
+              <td>54.18</td><td style="border-right: 2px solid #000;">55.64</td>
+              <td>71.67</td><td>62.01</td>
+            </tr>
+            <tr style="background-color:#d0e7ff;">
+              <td>✓</td>
+              <td><strong>RELIC (Ours)</strong></td>
+              <td><strong>64.29</strong></td><td style="border-right: 2px solid #000;"><strong>62.73</strong></td>
+              <td><strong>67.92</strong></td><td style="border-right: 2px solid #000;"><strong>65.48</strong></td>
+              <td><strong>62.84</strong></td><td style="border-right: 2px solid #000;"><strong>59.91</strong></td>
+              <td><strong>77.67</strong></td><td><strong>69.93</strong></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Absolute Gain (∆)</td>
+              <td>5.55</td><td style="border-right: 2px solid #000;">2.16</td>
+              <td>21.26</td><td style="border-right: 2px solid #000;">6.37</td>
+              <td>8.66</td><td style="border-right: 2px solid #000;">4.27</td>
+              <td>6.00</td><td>6.55</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- / Experiment -->
     
 
-    <!-- Paper index. -->
   </div>
 </section>
 
