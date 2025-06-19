@@ -57,16 +57,16 @@ Languages with Few-Shot Examples
               <a href="https://scholar.google.com/citations?user=5tdH2eEAAAAJ&hl=en">Vaibhav Singh</a><sup>2*</sup>,
             </span>
             <span class="author-block">
-              <a href="https://scholar.google.com/">Akash Ghosh</a><sup>3</sup>,
+              <a href="https://scholar.google.com/citations?user=NWc6Pw8AAAAJ&hl=en">Akash Ghosh</a><sup>3</sup>,
             </span>
             <span class="author-block">
-              <a href="https://scholar.google.com/">Soumyabrata Pal</a><sup>4</sup>,
+              <a href="https://scholar.google.com/citations?user=J4UxoTEAAAAJ&hl=en">Soumyabrata Pal</a><sup>4</sup>,
             </span>
             <span class="author-block">
-              <a href="https://scholar.google.com/">Subhadip Baidya</a><sup>5</sup>,
+              <a href="https://www.linkedin.com/in/baidyasubha/">Subhadip Baidya</a><sup>5</sup>,
             </span>
             <span class="author-block">
-              <a href="https://scholar.google.com/">Sriparna Saha</a><sup>3</sup>,
+              <a href="https://scholar.google.co.in/citations?user=Fj7jA_AAAAAJ&hl=en">Sriparna Saha</a><sup>3</sup>,
             </span>
             <span class="author-block">
               <a href="https://scholar.google.com/citations?user=X08l_4IAAAAJ&hl=en">Dinesh Manocha</a><sup>1</sup>,
@@ -163,7 +163,7 @@ Languages with Few-Shot Examples
 
   <!-- Caption -->
   <h2 class="subtitle has-text-centered" style="margin-top: 1rem;">
-    <span class="dnerf">Relic</span>: SOTA
+    Safety reward scores for safe vs. unsafe responses in English, Hindi, and Bodo—correctly favoring safe replies in high-resource languages but misranking them in low-resource Bodo.
   </h2>
 </section>
 
@@ -177,37 +177,18 @@ Languages with Few-Shot Examples
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Reward models are essential for aligning large
-            language models (LLMs) with human prefer-
-            ences. However, most open-source multilin-
-            gual reward models are primarily trained on
-            preference datasets in high-resource languages,
-            resulting in unreliable reward signals for low-
-            resource Indic languages. Collecting large-
-            scale, high-quality preference data for these
-            languages is prohibitively expensive, making
-            preference-based training approaches imprac-
-            tical. To address this challenge, we propose
-            RELIC, a novel in-context learning framework
-            for reward modeling in low-resource Indic
-            languages. RELIC trains a retriever with a
-            pairwise ranking objective to select in-context
-            examples from auxiliary high-resource lan-
-            guages that most effectively highlight the dis-
-            tinction between preferred and less-preferred
-            responses. Extensive experiments on three pref-
-            erence datasets—PKU-SafeRLHF, WebGPT,
-            and HH-RLHF—using state-of-the-art open-
-            source reward models demonstrate that RELIC
-            significantly improves reward model accuracy
-            for low-resource Indic languages, consistently
-            outperforming existing example selection meth-
-            ods. For example, on Bodo—a low-resource
-            Indic language—using a LLaMA-3.2-3B re-
-            ward model, RELIC achieves a 12.81% and
-            10.13% improvement in accuracy over zero-
-            shot prompting and state-of-the-art example
-            selection method, respectively.
+            Reward models are essential for aligning large language models (LLMs) with human preferences. 
+            However, most open-source multilingual reward models are primarily trained on preference datasets in high-resource languages, 
+            resulting in unreliable reward signals for low-resource Indic languages. 
+            Collecting large-scale, high-quality preference data for these languages is prohibitively expensive, 
+            making preference-based training approaches impractical. 
+            To address this challenge, we propose <span class="dnerf">RELIC</span>, a novel in-context learning framework for reward modeling in low-resource Indic languages.
+            <span class="dnerf">RELIC</span> trains a retriever with a pairwise ranking objective to select in-context examples from auxiliary high-resource languages 
+            that most effectively highlight the distinction between preferred and less-preferred responses. 
+            Extensive experiments on three preference datasets—PKU-SafeRLHF, WebGPT, and HH-RLHF—using state-of-the-art open-source reward models 
+            demonstrate that <span class="dnerf">RELIC</span> significantly improves reward model accuracy for low-resource Indic languages, 
+            consistently outperforming existing example selection methods. 
+            For example, on Bodo—a low-resource Indic language—using a LLaMA-3.2-3B reward model, <span class="dnerf">RELIC</span> achieves a 12.81% and 10.13% improvement in accuracy over zero-shot prompting and state-of-the-art example selection method, respectively.
           </p>
         </div>
       </div>
@@ -215,7 +196,66 @@ Languages with Few-Shot Examples
     <!--/ Abstract. -->
 
     <!-- Algo -->
-    
+  <div class="experiment-results">
+    <h2>Experimental Results</h2>
+    <table class="results-table">
+      <caption>Table 1: Evaluation on PKU-SafeRLHF (Ji et al., 2024).</caption>
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Bodo LM-3.1-8B</th>
+          <th>Bodo LM-3.2-3B</th>
+          <th>Santali LM-3.1-8B</th>
+          <th>Santali LM-3.2-3B</th>
+          <th>Manipuri LM-3.1-8B</th>
+          <th>Manipuri LM-3.2-3B</th>
+          <th>Odia LM-3.1-8B</th>
+          <th>Odia LM-3.2-3B</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Zero-shot ✗</td>
+          <td>54.32</td><td>53.18</td><td>43.76</td><td>51.90</td>
+          <td>47.88</td><td>53.65</td><td>62.53</td><td>52.27</td>
+        </tr>
+        <tr>
+          <td>Random ✗</td>
+          <td>55.41</td><td>52.67</td><td>45.88</td><td>50.66</td>
+          <td>45.39</td><td>54.03</td><td>56.45</td><td>53.77</td>
+        </tr>
+        <tr>
+          <td>BM25 ✗</td>
+          <td>48.22</td><td>56.09</td><td>43.94</td><td>56.82</td>
+          <td>48.33</td><td>55.47</td><td>66.94</td><td>63.38</td>
+        </tr>
+        <tr>
+          <td>Top-K ✗</td>
+          <td>57.53</td><td>58.91</td><td>45.84</td><td>55.48</td>
+          <td>50.91</td><td>51.32</td><td>68.34</td><td>60.72</td>
+        </tr>
+        <tr>
+          <td>EPR ✓</td>
+          <td>58.74</td><td>60.57</td><td>46.66</td><td>59.11</td>
+          <td>54.18</td><td>55.64</td><td>71.67</td><td>62.01</td>
+        </tr>
+        <tr>
+          <td><strong>RELIC (Ours) ✓</strong></td>
+          <td><strong>64.29</strong></td><td><strong>62.73</strong></td>
+          <td><strong>67.92</strong></td><td><strong>65.48</strong></td>
+          <td><strong>62.84</strong></td><td><strong>59.91</strong></td>
+          <td><strong>77.67</strong></td><td><strong>69.93</strong></td>
+        </tr>
+        <tr>
+          <td>Absolute Gain (∆)</td>
+          <td>5.55</td><td>2.16</td><td>21.26</td><td>6.37</td>
+          <td>8.66</td><td>4.27</td><td>6.00</td><td>6.55</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
     
 
     <!-- Paper index. -->
